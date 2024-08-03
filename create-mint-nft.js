@@ -13,12 +13,12 @@ const {
 // Configure accounts and client, and generate needed keys
 const operatorId = AccountId.fromString(process.env.OPERATOR_ID);
 const operatorKey = PrivateKey.fromStringDer(process.env.OPERATOR_PVKEY);
-// const treasuryId = AccountId.fromString(process.env.TREASURY_ID);
-// const treasuryKey = PrivateKey.fromStringDer(process.env.TREASURY_PVKEY);
+const treasuryId = AccountId.fromString(process.env.OPERATOR_ID);
+const treasuryKey = PrivateKey.fromStringDer(process.env.OPERATOR_PVKEY);
 const client = Client.forTestnet().setOperator(operatorId, operatorKey);
 const supplyKey = PrivateKey.generate();
 
-const treasuryKey = PrivateKey.generateED25519();
+// const treasuryKey = PrivateKey.generateED25519();
 
 // ACCOUNT CREATOR FUNCTION ==========================================
 async function accountCreatorFcn(pvKey, iBal) {
@@ -31,13 +31,13 @@ async function accountCreatorFcn(pvKey, iBal) {
 }
 
 async function createMintNFT() {
-  const [treasuryAccStatus, treasuryId] = await accountCreatorFcn(
-    treasuryKey,
-    3
-  );
-  console.log(
-    `- Created random account ${treasuryId} that has a balance of 3ℏ`
-  );
+  // const [treasuryAccStatus, treasuryId] = await accountCreatorFcn(
+  //   treasuryKey,
+  //   3
+  // );
+  // console.log(
+  //   `- Created random account ${treasuryId} that has a balance of 3ℏ`
+  // );
 
   const nftCreate = await new TokenCreateTransaction()
     .setTokenName("Goatstone")
