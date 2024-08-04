@@ -16,10 +16,10 @@ const treasuryKey = PrivateKey.fromStringDer(process.env.OPERATOR_PVKEY);
 const client = Client.forTestnet().setOperator(operatorId, operatorKey);
 const supplyKey = PrivateKey.generate();
 
-async function createMintNFT() {
+async function createMintNFT(tokenName, tokenSymbol) {
   const nftCreate = await new TokenCreateTransaction()
-    .setTokenName("Goatstone")
-    .setTokenSymbol("GOATSTONE")
+    .setTokenName(tokenName)
+    .setTokenSymbol(tokenSymbol)
     .setTokenType(TokenType.NonFungibleUnique)
     .setDecimals(0)
     .setInitialSupply(0)
@@ -39,4 +39,4 @@ async function createMintNFT() {
   //Log the token ID
   return tokenId;
 }
-createMintNFT().then((r)=>console.log(`tokentID: ${r} ${new Date()}`))
+createMintNFT('Goatstone','GOATSTONE').then((r)=>console.log(`tokentID: ${r} ${new Date()}`))
