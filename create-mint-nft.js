@@ -1,13 +1,11 @@
 require("dotenv").config();
 const {
-  Hbar,
   Client,
   AccountId,
   PrivateKey,
   TokenType,
   TokenSupplyType,
   TokenCreateTransaction,
-  AccountCreateTransaction,
 } = require("@hashgraph/sdk");
 
 // Configure accounts and client, and generate needed keys
@@ -18,27 +16,7 @@ const treasuryKey = PrivateKey.fromStringDer(process.env.OPERATOR_PVKEY);
 const client = Client.forTestnet().setOperator(operatorId, operatorKey);
 const supplyKey = PrivateKey.generate();
 
-// const treasuryKey = PrivateKey.generateED25519();
-
-// ACCOUNT CREATOR FUNCTION ==========================================
-async function accountCreatorFcn(pvKey, iBal) {
-  const response = await new AccountCreateTransaction()
-    .setInitialBalance(new Hbar(iBal))
-    .setKey(pvKey.publicKey)
-    .execute(client);
-  const receipt = await response.getReceipt(client);
-  return [receipt.status, receipt.accountId];
-}
-
 async function createMintNFT() {
-  // const [treasuryAccStatus, treasuryId] = await accountCreatorFcn(
-  //   treasuryKey,
-  //   3
-  // );
-  // console.log(
-  //   `- Created random account ${treasuryId} that has a balance of 3ℏ`
-  // );
-
   const nftCreate = await new TokenCreateTransaction()
     .setTokenName("Goatstone")
     .setTokenSymbol("GOATSTONE")
@@ -59,7 +37,6 @@ async function createMintNFT() {
   //Get the token ID
   const tokenId = nftCreateRx.tokenId;
   //Log the token ID
-  console.log(`\nCreated NFT with Token ID: ` + tokenId);
+  return tokenId;
 }
-
-createMintNFT();
+createMintNFT().then((r)=>console.log(`tokentID: ${r} ${new Date()}`))
