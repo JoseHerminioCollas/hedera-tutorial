@@ -15,7 +15,7 @@ record the file as an NFT on Hedera
 ((app, port) => {
   app.set('view engine', 'ejs');
   app.get("/", (req, res) => {
-    res.render('index',{hello: 'HELLO'});
+    res.render('index',{hello: 'Aaarto'});
   });
   app.get("/addfile", (req, res) => {
     const formData = new FormData();
