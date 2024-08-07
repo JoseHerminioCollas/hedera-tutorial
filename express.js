@@ -17,7 +17,7 @@ record the file as an NFT on Hedera
   app.get("/", (req, res) => {
     res.render('index',{hello: 'Aaarto'});
   });
-  app.get("/addfile", (req, res) => {
+  app.post("/addfile", (req, res) => {
     const formData = new FormData();
     const src = "./art.svg";
     const file = fs.createReadStream(src);
@@ -33,6 +33,7 @@ record the file as an NFT on Hedera
     pinFileToIPFS(formData, JWT).then((r) => {
       res.send(r);
     });
+    console.log('Aaarto post')
   });
 
   app.listen(port, () => {

@@ -15,7 +15,14 @@
       </text>
     </svg>
 
-    <button>Add an Aaarto</button>
+    <button onclick="a()">Add an Aaarto</button>
     <%= hello %>
+    <script>
+      const a = () => {
+        const fd = new FormData();
+        fd.append("abc", "abc");
+        fetch("/addfile", { method: "POST" });
+      };
+    </script>
   </body>
 </html>
