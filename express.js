@@ -24,12 +24,9 @@ record the file as an NFT on Hedera
   app.post("/addfile", (req, res) => {
     const {art} = req.body;
     const formData = new FormData();
-    const blob= new Blob(['xxx'], {type:'text/plain'})
-    const buff= Buffer.from(art)
-  
-    formData.append("file", buff, 'blob.txt');
+    formData.append("file", Buffer.from(art), 'aaarto.svg');
     const pinataMetadata = JSON.stringify({
-      name: "Goatstone : art",
+      name: "Aaarto",
     });
     formData.append("pinataMetadata", pinataMetadata);
     const pinataOptions = JSON.stringify({
