@@ -3,11 +3,15 @@
   "version": "1.0.0",
   "description": "A repo to follow along with the Hedera tutorial : https://docs.hedera.com/hedera",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
-    "@hashgraph/sdk": "^2.48.1"
+    "@hashgraph/sdk": "^2.48.1",
+    "@helia/unixfs": "^3.0.7",
+    "dotenv": "^16.4.5",
+    "helia": "^4.2.5"
   },
   "repository": {
     "type": "git",
