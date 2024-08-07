@@ -3,11 +3,20 @@ import pinFileToIPFS from "./pinFileToIPFS.js";
 import FormData from "form-data";
 import fs from "fs";
 import dotenv from "dotenv";
-dotenv.config();
 
+dotenv.config();
 const JWT = process.env.PINATA_KEY;
 
+/**
+A server to support the upload of an SVG file
+save the file to IPFS
+record the file as an NFT on Hedera
+*/
 ((app, port) => {
+  app.set('view engine', 'ejs');
+  app.get("/", (req, res) => {
+    res.render('index',{hello: 'HELLO'});
+  });
   app.get("/addfile", (req, res) => {
     const formData = new FormData();
     const src = "./art.svg";
@@ -21,8 +30,8 @@ const JWT = process.env.PINATA_KEY;
       cidVersion: 0,
     });
     formData.append("pinataOptions", pinataOptions);
-    pinFileToIPFS(formData, JWT).then(r=>{
-        res.send( r );
+    pinFileToIPFS(formData, JWT).then((r) => {
+      res.send(r);
     });
   });
 
