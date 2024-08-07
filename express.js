@@ -22,12 +22,14 @@ record the file as an NFT on Hedera
     res.render('index',{hello: 'Aaarto'});
   });
   app.post("/addfile", (req, res) => {
+    const {art} = req.body;
     const formData = new FormData();
-    const src = "./art.svg";
-    const file = fs.createReadStream(src);
-    formData.append("file", file);
+    const blob= new Blob(['xxx'], {type:'text/plain'})
+    const buff= Buffer.from(art)
+  
+    formData.append("file", buff, 'blob.txt');
     const pinataMetadata = JSON.stringify({
-      name: "Goatstone",
+      name: "Goatstone : art",
     });
     formData.append("pinataMetadata", pinataMetadata);
     const pinataOptions = JSON.stringify({
