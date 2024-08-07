@@ -19,9 +19,12 @@
     <%= hello %>
     <script>
       const a = () => {
-        const fd = new FormData();
-        fd.append("abc", "abc");
-        fetch("/addfile", { method: "POST" });
+        const req = new Request("/addfile", {
+          method: "POST",
+          body: JSON.stringify({ art: "art" }),
+          headers: {"Content-Type":"application/json"}
+        });
+        fetch(req)
       };
     </script>
   </body>

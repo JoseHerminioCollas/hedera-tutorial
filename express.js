@@ -1,4 +1,5 @@
 import express from "express";
+import bodyParser from 'body-parser'
 import pinFileToIPFS from "./pinFileToIPFS.js";
 import FormData from "form-data";
 import fs from "fs";
@@ -14,6 +15,9 @@ record the file as an NFT on Hedera
 */
 ((app, port) => {
   app.set('view engine', 'ejs');
+  app.use(bodyParser.urlencoded({extended:true}))
+  app.use(bodyParser.json())
+
   app.get("/", (req, res) => {
     res.render('index',{hello: 'Aaarto'});
   });
